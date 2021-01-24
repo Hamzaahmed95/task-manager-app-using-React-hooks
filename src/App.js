@@ -1,19 +1,21 @@
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
 import Login from "./components/dumbComponents/login/index";
-import Header from "./components/dumbComponents/header/index";
-import NoTask from "./components/dumbComponents/noTask/index";
+import Main from "./components/dumbComponents/main/index";
 
-function App() {
+const App = () => {
+  const [LoggedIn, isLoggedIn] = useState(false);
   return (
     <div className="App">
-      <Header />
-      <header className="App-header">
-        <NoTask />
-        {/* <Login /> */}
-      </header>
+      {LoggedIn ? (
+        <header className="App-header">
+          <Login />
+        </header>
+      ) : (
+        <Main />
+      )}
     </div>
   );
-}
+};
 
 export default App;

@@ -6,8 +6,6 @@ import InputField from "../../dumbComponents/customInputFields/index";
 const CustomizedInputs = props => {
   const [value, setValue] = useState("");
 
-  const handleSubmit = () => {};
-
   const handleChange = e => {
     setValue(e.target.value);
   };
@@ -33,7 +31,7 @@ const CustomizedInputs = props => {
             id="reddit-input"
           />
           <Button
-            onClick={handleSubmit}
+            onClick={props.handleSubmit}
             variant="contained"
             className="submitButton"
             disabled={!value}
@@ -52,7 +50,7 @@ const CustomizedInputs = props => {
             id="reddit-input"
           />
           <Button
-            onClick={handleSubmit}
+            onClick={props.handleSubmit}
             variant="contained"
             className="submitButton"
             disabled={!value}

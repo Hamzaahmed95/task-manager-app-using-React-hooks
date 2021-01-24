@@ -68,6 +68,9 @@ const Modals = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleSubmit = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -94,7 +97,7 @@ const Modals = () => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <Input modal={true} text="new Task" />
+            <Input modal={true} text="new Task" handleSubmit={handleSubmit} />
             {/* <h2 id="spring-modal-title">Spring modal</h2>
             <p id="spring-modal-description">react-spring animates me.</p> */}
           </div>
