@@ -3,7 +3,7 @@ import "./index.css";
 import Button from "@material-ui/core/Button";
 
 import InputField from "../../dumbComponents/customInputFields/index";
-const SearchTask = () => {
+const SearchTask = props => {
   const [value, setValue] = useState("");
   return (
     <div className="search_task_container">
@@ -17,7 +17,7 @@ const SearchTask = () => {
             type="text"
             label="Search by task name"
             defaultValue={value}
-            onChange={e => console.log("")}
+            onChange={props.handleChange}
             variant="filled"
             id="reddit-input"
           />
