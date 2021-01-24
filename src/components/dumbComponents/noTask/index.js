@@ -3,9 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import CustomizedInputs from "../../smartComponents/input";
+import Modals from "../modal/index";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     minWidth: 275
   },
@@ -20,20 +20,20 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12
   }
-});
+}));
 
-const Login = () => {
+const NoTask = () => {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h5" component="h2">
-          LOGIN
+        <Typography variant="h6" component="h2">
+          You have no task.
         </Typography>
-        <CustomizedInputs modal={false} text="submit" />
+        <Modals />
       </CardContent>
     </Card>
   );
 };
-export default Login;
+export default NoTask;

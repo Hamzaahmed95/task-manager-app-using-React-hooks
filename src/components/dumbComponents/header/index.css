@@ -1,0 +1,15 @@
+.Header {
+  background-color: azure;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.para {
+  background: blue;
+  color: white;
+}
+.button1 {
+  background: green;
+  color: white;
+}

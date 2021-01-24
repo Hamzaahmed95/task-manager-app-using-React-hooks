@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import "./index.css";
 import InputField from "../../dumbComponents/customInputFields/index";
 
-const CustomizedInputs = () => {
+const CustomizedInputs = props => {
   const [value, setValue] = useState("");
 
   const handleSubmit = () => {};
@@ -14,32 +14,53 @@ const CustomizedInputs = () => {
 
   return (
     <div className="input_container" align="center">
-      <>
-        <InputField
-          type="text"
-          label="Enter email"
-          defaultValue={value}
-          onChange={e => handleChange(e)}
-          variant="filled"
-          id="reddit-input"
-        />
-        <InputField
-          label="Enter password"
-          type="password"
-          defaultValue={value}
-          onChange={e => handleChange(e)}
-          variant="filled"
-          id="reddit-input"
-        />
-        <Button
-          onClick={handleSubmit}
-          variant="contained"
-          className="submitButton"
-          disabled={!value}
-        >
-          submit
-        </Button>
-      </>
+      {!props.modal ? (
+        <>
+          <InputField
+            type="text"
+            label="Enter email"
+            defaultValue={value}
+            onChange={e => handleChange(e)}
+            variant="filled"
+            id="reddit-input"
+          />
+          <InputField
+            label="Enter password"
+            type="password"
+            defaultValue={value}
+            onChange={e => handleChange(e)}
+            variant="filled"
+            id="reddit-input"
+          />
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            className="submitButton"
+            disabled={!value}
+          >
+            {props.text}
+          </Button>
+        </>
+      ) : (
+        <>
+          <InputField
+            label="Task Name"
+            type="text"
+            defaultValue={value}
+            onChange={e => handleChange(e)}
+            variant="filled"
+            id="reddit-input"
+          />
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            className="submitButton"
+            disabled={!value}
+          >
+            {props.text}
+          </Button>
+        </>
+      )}
     </div>
   );
 };
