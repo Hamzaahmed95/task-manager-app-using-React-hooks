@@ -72,7 +72,10 @@ const TaskList = props => {
                 <TableCell onClick={() => EditChange(task.task)} align="right">
                   <EditOutlinedIcon />
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  onClick={() => props.removeTask(task.task)}
+                  align="right"
+                >
                   <DeleteOutlinedIcon />
                 </TableCell>
               </TableRow>

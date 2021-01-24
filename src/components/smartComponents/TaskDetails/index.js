@@ -25,6 +25,21 @@ const TaskDetails = () => {
       });
   }, []);
 
+  const removeTask = value => {
+    firebase
+      .database()
+      .ref("tasks")
+      .orderByChild("task")
+      .equalTo(value)
+      .once("value")
+      .then(function(snapshot) {
+        snapshot.forEach(function(child) {
+          child.ref.remove();
+          console.log("Removed!");
+        });
+      });
+  };
+
   const handleChange = e => {
     const inputValue = e.target.value;
 
@@ -40,7 +55,7 @@ const TaskDetails = () => {
       <h1>Task Details Here</h1>
 
       <SearchTask handleChange={handleChange} />
-      <TaskList data={filterList} />
+      <TaskList data={filterList} removeTask={removeTask} />
     </div>
   );
 };
