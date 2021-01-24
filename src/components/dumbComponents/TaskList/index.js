@@ -52,7 +52,16 @@ const TaskList = props => {
           <TableBody>
             {props.data.map(task => (
               <TableRow key={task.task}>
-                <TableCell component="th" scope="row">
+                <TableCell
+                  component="th"
+                  style={{
+                    color: "#5285ec",
+                    fontWeight: "400",
+                    fontFamily: "adobe-clean, sans-serif",
+                    fontSize: "16px"
+                  }}
+                  scope="row"
+                >
                   <input
                     onChange={handleToggle(task.task)}
                     type="checkbox"

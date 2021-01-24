@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 import Button from "@material-ui/core/Button";
+import Modals from "../../dumbComponents/modal/index";
 
 import InputField from "../../dumbComponents/customInputFields/index";
 const SearchTask = props => {
@@ -23,13 +24,7 @@ const SearchTask = props => {
           />
         </div>
         <div className="search_task_subcontainer_second">
-          <Button
-            onClick={e => console.log("")}
-            variant="contained"
-            className="add_tasks_btn"
-          >
-            + Add Tasks
-          </Button>
+          <Modals />
         </div>
       </div>
     </div>

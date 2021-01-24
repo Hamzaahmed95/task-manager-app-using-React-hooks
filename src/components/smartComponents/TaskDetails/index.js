@@ -5,12 +5,13 @@ import firebase from "firebase";
 const TaskDetails = () => {
   const [taskList, setTaskList] = useState([]);
   const [filterList, setFilterList] = useState([]);
-  let datas = [];
+
   useEffect(() => {
     firebase
       .database()
       .ref("tasks")
       .on("value", snapshot => {
+        let datas = [];
         if (snapshot.exists()) {
           snapshot.forEach(function(data) {
             // setTaskList([...taskList, data.val()]);
