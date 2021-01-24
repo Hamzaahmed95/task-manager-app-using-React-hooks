@@ -2,12 +2,41 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import "./index.css";
 import InputField from "../../dumbComponents/customInputFields/index";
+import firebase from "firebase";
 
 const CustomizedInputs = props => {
-  const [value, setValue] = useState("");
+  const [taskName, setTaskName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = e => {
-    setValue(e.target.value);
+  const handleChangeTaskName = e => {
+    setTaskName(e.target.value);
+
+    console.log(taskName);
+  };
+  const handleChangeUsername = e => {
+    setUsername(e.target.value);
+  };
+  const handleChangePassword = e => {
+    setPassword(e.target.value);
+  };
+  const handleSubmitTask = () => {
+    const taskObject = {
+      userID: "hamzaahmed95",
+      task: taskName
+    };
+
+    let userRef = firebase.database().ref("tasks");
+    let newUserRef = userRef.push();
+    newUserRef
+      .set(taskObject)
+      .then(resp => {
+        console.log(resp);
+        props.handleSubmit();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
@@ -17,16 +46,16 @@ const CustomizedInputs = props => {
           <InputField
             type="text"
             label="Enter email"
-            defaultValue={value}
-            onChange={e => handleChange(e)}
+            defaultValue={username}
+            onChange={e => handleChangeUsername(e)}
             variant="filled"
             id="reddit-input"
           />
           <InputField
             label="Enter password"
             type="password"
-            defaultValue={value}
-            onChange={e => handleChange(e)}
+            defaultValue={password}
+            onChange={e => handleChangePassword(e)}
             variant="filled"
             id="reddit-input"
           />
@@ -34,7 +63,7 @@ const CustomizedInputs = props => {
             onClick={props.handleSubmit}
             variant="contained"
             className="submitButton"
-            disabled={!value}
+            disabled={!username || !password}
           >
             {props.text}
           </Button>
@@ -44,16 +73,16 @@ const CustomizedInputs = props => {
           <InputField
             label="Task Name"
             type="text"
-            defaultValue={value}
-            onChange={e => handleChange(e)}
+            defaultValue={taskName}
+            onChange={e => handleChangeTaskName(e)}
             variant="filled"
             id="reddit-input"
           />
           <Button
-            onClick={props.handleSubmit}
+            onClick={handleSubmitTask}
             variant="contained"
             className="submitButton"
-            disabled={!value}
+            disabled={!taskName}
           >
             {props.text}
           </Button>

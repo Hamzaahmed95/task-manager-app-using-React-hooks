@@ -24,7 +24,7 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9)
 ];
 
-const TaskList = () => {
+const TaskList = props => {
   const [checked, setChecked] = useState([]); // categories
 
   const EditChange = e => {
@@ -50,17 +50,17 @@ const TaskList = () => {
       <TableContainer component={Paper}>
         <Table className="table_width" aria-label="simple table">
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.name}>
+            {props.data.map(task => (
+              <TableRow key={task.task}>
                 <TableCell component="th" scope="row">
                   <input
-                    onChange={handleToggle(row.name)}
+                    onChange={handleToggle(task.task)}
                     type="checkbox"
                     className="mr-2"
                   />
-                  {row.name}
+                  {task.task}
                 </TableCell>
-                <TableCell onClick={() => EditChange(row.name)} align="right">
+                <TableCell onClick={() => EditChange(task.task)} align="right">
                   <EditOutlinedIcon />
                 </TableCell>
                 <TableCell align="right">
