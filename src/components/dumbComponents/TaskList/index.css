@@ -1,0 +1,12 @@
+.task_list_container {
+  display: flex !important;
+}
+
+.table_width {
+  min-width: 1000px;
+}
+@media only screen and (max-width: 600px) {
+  .table_width {
+    min-width: 0px;
+  }
+}

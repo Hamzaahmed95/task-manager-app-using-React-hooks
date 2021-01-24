@@ -10,11 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
-const useStyles = makeStyles({
-  table: {
-    minWidth: 1000
-  }
-});
+import "./index.css";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -29,7 +25,6 @@ const rows = [
 ];
 
 const TaskList = () => {
-  const classes = useStyles();
   const [checked, setChecked] = useState([]); // categories
 
   const EditChange = e => {
@@ -51,30 +46,32 @@ const TaskList = () => {
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                <input
-                  onChange={handleToggle(row.name)}
-                  type="checkbox"
-                  className="mr-2"
-                />
-                {row.name}
-              </TableCell>
-              <TableCell onClick={() => EditChange(row.name)} align="right">
-                <EditOutlinedIcon />
-              </TableCell>
-              <TableCell align="right">
-                <DeleteOutlinedIcon />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className="task_list_container">
+      <TableContainer component={Paper}>
+        <Table className="table_width" aria-label="simple table">
+          <TableBody>
+            {rows.map(row => (
+              <TableRow key={row.name}>
+                <TableCell component="th" scope="row">
+                  <input
+                    onChange={handleToggle(row.name)}
+                    type="checkbox"
+                    className="mr-2"
+                  />
+                  {row.name}
+                </TableCell>
+                <TableCell onClick={() => EditChange(row.name)} align="right">
+                  <EditOutlinedIcon />
+                </TableCell>
+                <TableCell align="right">
+                  <DeleteOutlinedIcon />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 export default TaskList;
