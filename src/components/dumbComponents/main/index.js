@@ -8,8 +8,8 @@ const Main = () => {
     <div className="Main">
       <Header />
       <header className="Main-header">
-        {/* <NoTask /> */}
-        <TaskDetails />
+        <NoTask />
+        {/* <TaskDetails /> */}
       </header>
     </div>
   );

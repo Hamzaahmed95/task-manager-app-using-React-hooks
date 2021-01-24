@@ -15,7 +15,7 @@ const SearchTask = () => {
           <InputField
             className="search_task_input"
             type="text"
-            label="Enter email"
+            label="Search by task name"
             defaultValue={value}
             onChange={e => console.log("")}
             variant="filled"
