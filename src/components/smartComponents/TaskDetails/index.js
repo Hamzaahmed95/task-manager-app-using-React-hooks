@@ -25,20 +25,6 @@ const TaskDetails = () => {
       });
   }, []);
 
-  const editTask = (preValue, newValue) => {
-    firebase
-      .database()
-      .ref("tasks")
-      .orderByChild("task")
-      .equalTo(preValue)
-      .once("value")
-      .then(function(snapshot) {
-        snapshot.forEach(function(child) {
-          child.ref.child("task").set(newValue);
-          console.log("Removed!");
-        });
-      });
-  };
   const removeTask = value => {
     console.log("remove: " + value);
     firebase
@@ -51,6 +37,19 @@ const TaskDetails = () => {
         snapshot.forEach(function(child) {
           child.ref.remove();
           console.log("Removed!");
+        });
+      });
+  };
+  const setCompleteTask = (value, flag) => {
+    console.log("setCompleteTask: " + value + " " + flag);
+    firebase
+      .database()
+      .ref("tasks")
+      .orderByChild("task")
+      .equalTo(value)
+      .once("value", snapshot => {
+        snapshot.forEach(function(data) {
+          data.ref.child("isCompleted").set(flag);
         });
       });
   };
@@ -70,7 +69,11 @@ const TaskDetails = () => {
       <h1>Task Details Here</h1>
 
       <SearchTask handleChange={handleChange} />
-      <TaskList data={filterList} removeTask={removeTask} />
+      <TaskList
+        setCompleteTask={setCompleteTask}
+        data={filterList}
+        removeTask={removeTask}
+      />
     </div>
   );
 };

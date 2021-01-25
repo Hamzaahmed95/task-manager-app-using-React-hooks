@@ -55,7 +55,8 @@ const CustomizedInputs = props => {
   const handleSubmitTask = () => {
     const taskObject = {
       userID: "hamzaahmed95",
-      task: taskName
+      task: taskName,
+      isCompleted: 0
     };
 
     let userRef = firebase.database().ref("tasks");

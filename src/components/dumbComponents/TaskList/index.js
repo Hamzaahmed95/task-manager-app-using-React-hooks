@@ -13,37 +13,27 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import Modals from "../modal/index";
 import "./index.css";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9)
-];
-
 const TaskList = props => {
   const [checked, setChecked] = useState([]); // categories
 
-  const EditChange = e => {
-    alert(e);
-  };
   const handleToggle = c => () => {
     // return the first index or -1
     const clickedCategory = checked.indexOf(c);
+
     const all = [...checked];
+    console.log("clickedCategory: " + clickedCategory);
 
     if (clickedCategory === -1) {
       all.push(c);
+      props.setCompleteTask(c, 1);
+      console.log("ahmedd: checked!!" + c);
     } else {
+      props.setCompleteTask(c, 0);
+      console.log("ahmedd: unchecked!!" + c);
       all.splice(clickedCategory, 1);
     }
-    console.log(all);
+
     setChecked(all);
-    alert(c);
   };
 
   return (
@@ -68,7 +58,8 @@ const TaskList = props => {
                     type="checkbox"
                     className="mr-2"
                   />
-                  {task.task}
+                  {console.log("TaskLists: " + task.isCompleted)}
+                  {task.isCompleted === 1 ? <del>{task.task}</del> : task.task}
                 </TableCell>
                 <TableCell align="right">
                   <Modals isEdit={true} taskItem={task.task} />
