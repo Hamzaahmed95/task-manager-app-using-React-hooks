@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Login from "./components/dumbComponents/login/index";
-import Main from "./components/dumbComponents/main/index";
+import Loading from "./components/dumbComponents/loading/index";
 import firebase from "firebase/app";
 import { firebaseConfig } from "./constants/apikey";
 const LoggedIn = false;
@@ -22,7 +22,7 @@ class App extends Component {
             <Login />
           </header>
         ) : (
-          <Main />
+          <Loading />
         )}
       </div>
     );

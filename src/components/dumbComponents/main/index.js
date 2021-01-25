@@ -1,18 +1,9 @@
 import "./index.css";
-import Header from "../header/index";
-import NoTask from "../noTask/index";
 import TaskDetails from "../../smartComponents/TaskDetails/index";
-
-const Main = () => {
-  return (
-    <div className="Main">
-      <Header />
-      <header className="Main-header">
-        {/* <NoTask /> */}
-        <TaskDetails />
-      </header>
-    </div>
-  );
+import NoTask from "../noTask/index";
+const Main = props => {
+  console.log("testing: " + props.isTaskAdded);
+  return <div>{props.isTaskAdded ? <TaskDetails /> : <NoTask />}</div>;
 };
 
 export default Main;
