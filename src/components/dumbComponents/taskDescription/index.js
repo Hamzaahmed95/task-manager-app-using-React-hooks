@@ -22,7 +22,9 @@ const TaskDescription = props => {
         <br />
         <span style={{ color: "#5285EC", fontSize: "70px" }}>
           {props.totalTaskCompleted}
-          <span style={{ fontSize: "25px", color: "grey" }}>/20</span>
+          <span style={{ fontSize: "25px", color: "grey" }}>
+            /{props.totalTasks}
+          </span>
         </span>
       </Card>
       <Card align="left" className="task_description_card2">

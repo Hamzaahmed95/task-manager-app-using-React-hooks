@@ -7,6 +7,7 @@ const TaskDetails = () => {
   const [taskList, setTaskList] = useState([]);
   const [filterList, setFilterList] = useState([]);
   const [totalTaskCompleted, setTotalTaskCompleted] = useState(0);
+  const [totalTasks, setTotalTasks] = useState(0);
 
   useEffect(() => {
     console.log("localstorage1: " + localStorage.getItem("username"));
@@ -17,9 +18,11 @@ const TaskDetails = () => {
       .equalTo(localStorage.getItem("username"))
       .on("value", snapshot => {
         setTotalTaskCompleted(0);
+        setTotalTasks(0);
         let datas = [];
         if (snapshot.exists()) {
           snapshot.forEach(function(data) {
+            setTotalTasks(totalTasks => totalTasks + 1);
             // setTaskList([...taskList, data.val()]);
             if (data.child("isCompleted").val() === 1) {
               console.log("TaskDetails: " + data.child("isCompleted").val());
@@ -78,7 +81,10 @@ const TaskDetails = () => {
 
   return (
     <div>
-      <TaskDescription totalTaskCompleted={totalTaskCompleted} />
+      <TaskDescription
+        totalTasks={totalTasks}
+        totalTaskCompleted={totalTaskCompleted}
+      />
       <SearchTask handleChange={handleChange} />
       <TaskList
         setCompleteTask={setCompleteTask}
