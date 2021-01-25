@@ -35,11 +35,6 @@ const CustomizedInputs = props => {
   };
 
   const handleSubmitEditTask = () => {
-    // const taskObject = {
-    //   userID: "hamzaahmed95",
-    //   task: editTaskName
-    // };
-
     firebase
       .database()
       .ref("tasks")
@@ -54,7 +49,7 @@ const CustomizedInputs = props => {
 
   const handleSubmitTask = () => {
     const taskObject = {
-      userID: "hamzaahmed95",
+      userID: localStorage.getItem("username"),
       task: taskName,
       isCompleted: 0
     };

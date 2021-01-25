@@ -8,9 +8,12 @@ const TaskDetails = () => {
   const [filterList, setFilterList] = useState([]);
 
   useEffect(() => {
+    console.log("localstorage1: " + localStorage.getItem("username"));
     firebase
       .database()
       .ref("tasks")
+      .orderByChild("userID")
+      .equalTo(localStorage.getItem("username"))
       .on("value", snapshot => {
         let datas = [];
         if (snapshot.exists()) {
