@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Input from "../../smartComponents/input/index";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import "./index.css";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -22,8 +23,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3)
   },
   button: {
-    margin: theme.spacing(1),
-    backgroundColor: "#5285ec"
+    backgroundColor: "#5285ec",
+    width: "100%"
   }
 }));
 

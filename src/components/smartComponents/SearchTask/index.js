@@ -9,7 +9,7 @@ const SearchTask = props => {
   return (
     <div className="search_task_container">
       <div>
-        <p>Tasks</p>
+        <p style={{ color: "black" }}>Tasks</p>
       </div>
       <div className="search_task_subcontainer">
         <div className="search_task_subcontainer_first">

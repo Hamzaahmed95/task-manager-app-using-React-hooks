@@ -1,6 +1,7 @@
 .search_task_container {
   display: flex;
   justify-content: space-between;
+  padding-top: 3%;
 }
 .search_task_subcontainer {
   display: flex;
@@ -10,6 +11,9 @@
   height: 60% !important;
 }
 
+.search_task_subcontainer_first {
+  padding-right: 10px;
+}
 .add_tasks_btn {
   background-color: #5285ec !important;
   color: white !important;

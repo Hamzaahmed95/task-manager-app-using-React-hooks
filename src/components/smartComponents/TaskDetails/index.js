@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TaskList from "../../dumbComponents/TaskList/index";
 import SearchTask from "../SearchTask/index";
 import firebase from "firebase";
+import TaskDescription from "../../dumbComponents/taskDescription/index";
 const TaskDetails = () => {
   const [taskList, setTaskList] = useState([]);
   const [filterList, setFilterList] = useState([]);
@@ -66,8 +67,7 @@ const TaskDetails = () => {
 
   return (
     <div>
-      <h1>Task Details Here</h1>
-
+      <TaskDescription />
       <SearchTask handleChange={handleChange} />
       <TaskList
         setCompleteTask={setCompleteTask}

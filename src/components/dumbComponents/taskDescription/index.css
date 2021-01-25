@@ -1,0 +1,11 @@
+.task_description_container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 600px) {
+  .task_description_card {
+    width: 100%;
+  }
+}
