@@ -24,7 +24,7 @@ const SearchTask = props => {
           />
         </div>
         <div className="search_task_subcontainer_second">
-          <Modals />
+          <Modals isEdit={false} />
         </div>
       </div>
     </div>

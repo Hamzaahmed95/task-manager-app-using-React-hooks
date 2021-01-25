@@ -31,7 +31,7 @@ const NoTask = () => {
         <Typography variant="h6" component="h2">
           You have no task.
         </Typography>
-        <Modals />
+        <Modals isEdit={false} />
       </CardContent>
     </Card>
   );

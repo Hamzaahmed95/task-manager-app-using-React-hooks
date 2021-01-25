@@ -7,6 +7,7 @@ import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is requir
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Input from "../../smartComponents/input/index";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -57,7 +58,7 @@ Fade.propTypes = {
   onExited: PropTypes.func
 };
 
-const Modals = () => {
+const Modals = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -74,15 +75,21 @@ const Modals = () => {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleOpen}
-        className={classes.button}
-        startIcon={<AddIcon />}
-      >
-        New Task
-      </Button>
+      {!props.isEdit ? (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleOpen}
+          className={classes.button}
+          startIcon={<AddIcon />}
+        >
+          New Task
+        </Button>
+      ) : (
+        <div onClick={handleOpen}>
+          <EditOutlinedIcon />
+        </div>
+      )}
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -97,7 +104,13 @@ const Modals = () => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <Input modal={true} text="new Task" handleSubmit={handleSubmit} />
+            <Input
+              modal={true}
+              text="new Task"
+              taskItem={props.taskItem}
+              handleSubmit={handleSubmit}
+              isEdit={props.isEdit}
+            />
             {/* <h2 id="spring-modal-title">Spring modal</h2>
             <p id="spring-modal-description">react-spring animates me.</p> */}
           </div>

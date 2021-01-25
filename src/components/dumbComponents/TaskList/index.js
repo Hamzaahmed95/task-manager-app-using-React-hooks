@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import Modals from "../modal/index";
 import "./index.css";
 
 function createData(name, calories, fat, carbs, protein) {
@@ -69,8 +70,8 @@ const TaskList = props => {
                   />
                   {task.task}
                 </TableCell>
-                <TableCell onClick={() => EditChange(task.task)} align="right">
-                  <EditOutlinedIcon />
+                <TableCell align="right">
+                  <Modals isEdit={true} taskItem={task.task} />
                 </TableCell>
                 <TableCell
                   onClick={() => props.removeTask(task.task)}

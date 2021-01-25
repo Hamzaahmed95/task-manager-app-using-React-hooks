@@ -20,12 +20,27 @@ const TaskDetails = () => {
           setTaskList(datas);
           setFilterList(datas);
         } else {
-          console.log("asdasxzczxc show toast invalid ID");
+          // console.log("asdasxzczxc show toast invalid ID");
         }
       });
   }, []);
 
+  const editTask = (preValue, newValue) => {
+    firebase
+      .database()
+      .ref("tasks")
+      .orderByChild("task")
+      .equalTo(preValue)
+      .once("value")
+      .then(function(snapshot) {
+        snapshot.forEach(function(child) {
+          child.ref.child("task").set(newValue);
+          console.log("Removed!");
+        });
+      });
+  };
   const removeTask = value => {
+    console.log("remove: " + value);
     firebase
       .database()
       .ref("tasks")
