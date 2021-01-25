@@ -6,6 +6,7 @@ import TaskDescription from "../../dumbComponents/taskDescription/index";
 const TaskDetails = () => {
   const [taskList, setTaskList] = useState([]);
   const [filterList, setFilterList] = useState([]);
+  const [totalTaskCompleted, setTotalTaskCompleted] = useState(0);
 
   useEffect(() => {
     console.log("localstorage1: " + localStorage.getItem("username"));
@@ -15,10 +16,17 @@ const TaskDetails = () => {
       .orderByChild("userID")
       .equalTo(localStorage.getItem("username"))
       .on("value", snapshot => {
+        setTotalTaskCompleted(0);
         let datas = [];
         if (snapshot.exists()) {
           snapshot.forEach(function(data) {
             // setTaskList([...taskList, data.val()]);
+            if (data.child("isCompleted").val() === 1) {
+              console.log("TaskDetails: " + data.child("isCompleted").val());
+              setTotalTaskCompleted(
+                totalTaskCompleted => totalTaskCompleted + 1
+              );
+            }
             datas.push(data.val());
           });
           setTaskList(datas);
@@ -70,7 +78,7 @@ const TaskDetails = () => {
 
   return (
     <div>
-      <TaskDescription />
+      <TaskDescription totalTaskCompleted={totalTaskCompleted} />
       <SearchTask handleChange={handleChange} />
       <TaskList
         setCompleteTask={setCompleteTask}

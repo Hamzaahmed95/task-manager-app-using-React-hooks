@@ -13,7 +13,7 @@ let arrayofTasks = [
     task: "Clean the room"
   }
 ];
-const TaskDescription = () => {
+const TaskDescription = props => {
   const [completedTask, isCompletedTask] = useState(false);
   return (
     <div className="task_description_container">
@@ -21,7 +21,8 @@ const TaskDescription = () => {
         <span style={{ color: "grey", fontSize: "22px" }}>Task Completed </span>
         <br />
         <span style={{ color: "#5285EC", fontSize: "70px" }}>
-          5<span style={{ fontSize: "25px", color: "grey" }}>/20</span>
+          {props.totalTaskCompleted}
+          <span style={{ fontSize: "25px", color: "grey" }}>/20</span>
         </span>
       </Card>
       <Card align="left" className="task_description_card2">
