@@ -5,7 +5,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import Header from "../header/index";
 
-const Loading = () => {
+const Loading = props => {
   const [Loadingg, isLoadingg] = useState(false);
   const [TaskAdded, isTaskAdded] = useState(false);
 
@@ -39,7 +39,7 @@ const Loading = () => {
   }, []);
   return (
     <div className="Loading">
-      <Header />
+      <Header logoutSubmit={props.logoutSubmit} username={props.username} />
 
       <header className="Loading-header">
         {!Loadingg ? (

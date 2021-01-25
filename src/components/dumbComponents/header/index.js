@@ -1,11 +1,14 @@
 import React from "react";
 import "./index.css";
+import Button from "@material-ui/core/Button";
 
-const Header = () => {
+const Header = props => {
   return (
     <div className="Header">
-      <p className="para">Header</p>
-      <p className="button1"> Logout</p>
+      <p className="para">{props.username}</p>
+      <Button onClick={props.logoutSubmit} className="button1" color="primary">
+        Logout
+      </Button>
     </div>
   );
 };

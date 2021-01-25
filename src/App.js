@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import Login from "./components/dumbComponents/login/index";
-import Loading from "./components/dumbComponents/loading/index";
+import AppComponent from "./components/AppComponent";
 import firebase from "firebase/app";
 import { firebaseConfig } from "./constants/apikey";
-const LoggedIn = false;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,13 +15,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {LoggedIn ? (
-          <header className="App-header">
-            <Login />
-          </header>
-        ) : (
-          <Loading />
-        )}
+        <AppComponent />
       </div>
     );
   }

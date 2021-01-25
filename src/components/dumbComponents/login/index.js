@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Login = () => {
+const Login = props => {
   const classes = useStyles();
 
   return (
@@ -31,7 +31,16 @@ const Login = () => {
         <Typography variant="h5" component="h2">
           LOGIN
         </Typography>
-        <CustomizedInputs modal={false} text="submit" />
+        <CustomizedInputs
+          handleUserSubmit={props.handleUserSubmit}
+          modal={false}
+          text="submit"
+        />
+        {props.errorLoggedIn && (
+          <span style={{ color: "red", fontSize: "15px" }}>
+            {props.errorMessage}
+          </span>
+        )}
       </CardContent>
     </Card>
   );

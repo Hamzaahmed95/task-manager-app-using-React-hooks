@@ -7,8 +7,8 @@ import firebase from "firebase";
 const CustomizedInputs = props => {
   const [taskName, setTaskName] = useState("");
   const [editTaskName, setEditTaskName] = useState("");
+  const [id, setId] = useState("");
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (props.isEdit) {
@@ -21,8 +21,8 @@ const CustomizedInputs = props => {
 
     console.log(taskName);
   };
-  const handleChangeUsername = e => {
-    setUsername(e.target.value);
+  const handleChangeId = e => {
+    setId(e.target.value);
   };
   const handleChangeEditTaskName = e => {
     setEditTaskName(e.target.value);
@@ -30,8 +30,8 @@ const CustomizedInputs = props => {
     console.log(editTaskName);
   };
 
-  const handleChangePassword = e => {
-    setPassword(e.target.value);
+  const handleChangeUsername = e => {
+    setUsername(e.target.value);
   };
 
   const handleSubmitEditTask = () => {
@@ -78,25 +78,25 @@ const CustomizedInputs = props => {
         <>
           <InputField
             type="text"
-            label="Enter email"
+            label="Id"
+            defaultValue={id}
+            onChange={e => handleChangeId(e)}
+            variant="filled"
+            id="reddit-input"
+          />
+          <InputField
+            type="text"
+            label="Name"
             defaultValue={username}
             onChange={e => handleChangeUsername(e)}
             variant="filled"
             id="reddit-input"
           />
-          <InputField
-            label="Enter password"
-            type="password"
-            defaultValue={password}
-            onChange={e => handleChangePassword(e)}
-            variant="filled"
-            id="reddit-input"
-          />
           <Button
-            onClick={props.handleSubmit}
+            onClick={e => props.handleUserSubmit(id, username)}
             variant="contained"
             className="submitButton"
-            disabled={!username || !password}
+            disabled={!id || !username}
           >
             {props.text}
           </Button>
