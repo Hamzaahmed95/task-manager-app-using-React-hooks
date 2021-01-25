@@ -8,7 +8,7 @@
 }
 .search_task_input {
   width: 100%;
-  height: 60% !important;
+  height: 75% !important;
 }
 
 .search_task_subcontainer_first {
@@ -46,5 +46,9 @@
     height: 50%;
     width: 100%;
     margin-left: 0px !important;
+  }
+  .search_task_main_container {
+    padding-left: 5%;
+    padding-right: 5%;
   }
 }

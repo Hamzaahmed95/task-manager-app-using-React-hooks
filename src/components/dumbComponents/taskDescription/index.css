@@ -1,11 +1,27 @@
 .task_description_container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
+}
+.task_description_card1,
+.task_description_card2,
+.task_description_card3 {
+  padding-left: 1%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  width: 30%;
 }
 
 @media only screen and (max-width: 600px) {
-  .task_description_card {
+  .task_description_card1,
+  .task_description_card2 {
     width: 100%;
+    padding-left: 10% !important;
+    margin-top: 5% !important;
+  }
+  .task_description_card3 {
+    width: 100%;
+    padding-bottom: 5%;
+    margin-top: 5%;
   }
 }
