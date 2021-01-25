@@ -5,6 +5,7 @@ import firebase from "firebase";
 import TaskDescription from "../../dumbComponents/taskDescription/index";
 const TaskDetails = () => {
   const [taskList, setTaskList] = useState([]);
+  const [recentTaskList, setRecentTaskList] = useState([]);
   const [filterList, setFilterList] = useState([]);
   const [totalTaskCompleted, setTotalTaskCompleted] = useState(0);
   const [totalTasks, setTotalTasks] = useState(0);
@@ -23,9 +24,7 @@ const TaskDetails = () => {
         if (snapshot.exists()) {
           snapshot.forEach(function(data) {
             setTotalTasks(totalTasks => totalTasks + 1);
-            // setTaskList([...taskList, data.val()]);
             if (data.child("isCompleted").val() === 1) {
-              console.log("TaskDetails: " + data.child("isCompleted").val());
               setTotalTaskCompleted(
                 totalTaskCompleted => totalTaskCompleted + 1
               );
@@ -34,8 +33,24 @@ const TaskDetails = () => {
           });
           setTaskList(datas);
           setFilterList(datas);
-        } else {
-          // console.log("asdasxzczxc show toast invalid ID");
+        }
+      });
+  }, []);
+  useEffect(() => {
+    console.log("localstorage1: " + localStorage.getItem("username"));
+    firebase
+      .database()
+      .ref("tasks")
+      .orderByChild("userID")
+      .equalTo(localStorage.getItem("username"))
+      .limitToLast(3)
+      .on("value", snapshot => {
+        let datas = [];
+        if (snapshot.exists()) {
+          snapshot.forEach(function(data) {
+            datas.push(data.val());
+          });
+          setRecentTaskList(datas);
         }
       });
   }, []);
@@ -84,6 +99,7 @@ const TaskDetails = () => {
       <TaskDescription
         totalTasks={totalTasks}
         totalTaskCompleted={totalTaskCompleted}
+        recentTaskList={recentTaskList}
       />
       <SearchTask handleChange={handleChange} />
       <TaskList

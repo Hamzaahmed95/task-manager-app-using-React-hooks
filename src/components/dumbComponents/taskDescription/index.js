@@ -31,9 +31,9 @@ const TaskDescription = props => {
         <span style={{ color: "grey", fontSize: "22px" }}>
           Latest Created Tasks
         </span>
-        {arrayofTasks.map(task => (
-          <div keys={task.id}>
-            {completedTask ? (
+        {props.recentTaskList.map(task => (
+          <div keys={task}>
+            {task.isCompleted ? (
               <del>
                 <li style={{ color: "grey", fontSize: "12px" }}>{task.task}</li>
               </del>
@@ -48,7 +48,11 @@ const TaskDescription = props => {
         ))}
       </Card>
       <Card className="task_description_card3">
-        <DonutChart align="center" />
+        <DonutChart
+          totalTaskCompleted={props.totalTaskCompleted}
+          totalTasks={props.totalTasks}
+          align="center"
+        />
       </Card>
     </div>
   );
