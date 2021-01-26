@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Login from "./dumbComponents/login/index";
-import Loading from "./dumbComponents/loading/index";
+import Loading from "./smartComponents/loading/index";
 import firebase from "firebase";
 import {
   INVALID_USERNAME,

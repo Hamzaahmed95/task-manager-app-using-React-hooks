@@ -8,7 +8,8 @@ import { NO_TASK_TEXT } from "../../../constants/messages";
 
 const useStyles = makeStyles(() => ({
   root: {
-    minWidth: 275
+    minWidth: 275,
+    marginTop: 100
   }
 }));
 

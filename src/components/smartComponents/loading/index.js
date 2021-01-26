@@ -4,7 +4,7 @@ import Main from "../../dumbComponents/main/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
 import Header from "../../dumbComponents/header/index";
-import { TASKS } from "../../../constants/messages";
+import { TASKS, USERNAME, USERID } from "../../../constants/messages";
 const LoadingComponent = props => {
   const [Loading, isLoading] = useState(false);
   const [TaskAdded, isTaskAdded] = useState(false);
@@ -13,12 +13,13 @@ const LoadingComponent = props => {
     firebase
       .database()
       .ref(TASKS)
-      .orderByChild(TASKS)
+      .orderByChild(USERID)
+      .equalTo(localStorage.getItem(USERNAME))
       .once("value", snapshot => {
         setTimeout(() => {
           isLoading(true);
         }, 2000);
-
+        console.log("loading: " + snapshot.exists());
         if (snapshot.exists()) {
           isTaskAdded(true);
         }
@@ -27,12 +28,12 @@ const LoadingComponent = props => {
     firebase
       .database()
       .ref(TASKS)
+      .orderByChild(USERID)
+      .equalTo(localStorage.getItem(USERNAME))
       .on("value", snapshot => {
-        setTimeout(() => {
-          if (snapshot.exists()) {
-            isTaskAdded(true);
-          }
-        }, 2000);
+        if (snapshot.exists()) {
+          isTaskAdded(true);
+        }
       });
   }, []);
   return (

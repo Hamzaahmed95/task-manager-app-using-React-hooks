@@ -1,5 +1,6 @@
 .task_list_container {
   display: flex !important;
+  height: 300px !important;
 }
 
 .table_width {
