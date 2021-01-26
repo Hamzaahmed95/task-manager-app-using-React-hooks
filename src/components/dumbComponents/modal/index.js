@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Input from "../../smartComponents/input/index";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import { ADD_NEW_TASK_TEXT } from "../../../constants/messages";
 import "./index.css";
 
 const useStyles = makeStyles(theme => ({
@@ -84,7 +85,7 @@ const Modals = props => {
           className={classes.button}
           startIcon={<AddIcon />}
         >
-          New Task
+          {ADD_NEW_TASK_TEXT}
         </Button>
       ) : (
         <div onClick={handleOpen}>
@@ -112,8 +113,6 @@ const Modals = props => {
               handleSubmit={handleSubmit}
               isEdit={props.isEdit}
             />
-            {/* <h2 id="spring-modal-title">Spring modal</h2>
-            <p id="spring-modal-description">react-spring animates me.</p> */}
           </div>
         </Fade>
       </Modal>

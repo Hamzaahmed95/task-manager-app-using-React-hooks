@@ -3,6 +3,14 @@ import TaskList from "../../dumbComponents/TaskList/index";
 import SearchTask from "../SearchTask/index";
 import firebase from "firebase";
 import TaskDescription from "../../dumbComponents/taskDescription/index";
+import {
+  TASKS,
+  TASK,
+  USERID,
+  USERNAME,
+  IS_COMPLETED
+} from "../../../constants/messages";
+
 const TaskDetails = () => {
   const [taskList, setTaskList] = useState([]);
   const [recentTaskList, setRecentTaskList] = useState([]);
@@ -11,12 +19,11 @@ const TaskDetails = () => {
   const [totalTasks, setTotalTasks] = useState(0);
 
   useEffect(() => {
-    console.log("localstorage1: " + localStorage.getItem("username"));
     firebase
       .database()
-      .ref("tasks")
-      .orderByChild("userID")
-      .equalTo(localStorage.getItem("username"))
+      .ref(TASKS)
+      .orderByChild(USERID)
+      .equalTo(localStorage.getItem(USERNAME))
       .on("value", snapshot => {
         setTotalTaskCompleted(0);
         setTotalTasks(0);
@@ -24,7 +31,7 @@ const TaskDetails = () => {
         if (snapshot.exists()) {
           snapshot.forEach(function(data) {
             setTotalTasks(totalTasks => totalTasks + 1);
-            if (data.child("isCompleted").val() === 1) {
+            if (data.child(IS_COMPLETED).val() === 1) {
               setTotalTaskCompleted(
                 totalTaskCompleted => totalTaskCompleted + 1
               );
@@ -36,13 +43,13 @@ const TaskDetails = () => {
         }
       });
   }, []);
+
   useEffect(() => {
-    console.log("localstorage1: " + localStorage.getItem("username"));
     firebase
       .database()
-      .ref("tasks")
-      .orderByChild("userID")
-      .equalTo(localStorage.getItem("username"))
+      .ref(TASKS)
+      .orderByChild(USERID)
+      .equalTo(localStorage.getItem(USERNAME))
       .limitToLast(3)
       .on("value", snapshot => {
         let datas = [];
@@ -56,35 +63,33 @@ const TaskDetails = () => {
   }, []);
 
   const removeTask = value => {
-    console.log("remove: " + value);
     firebase
       .database()
-      .ref("tasks")
-      .orderByChild("task")
+      .ref(TASKS)
+      .orderByChild(TASK)
       .equalTo(value)
       .once("value")
       .then(function(snapshot) {
         snapshot.forEach(function(child) {
           child.ref.remove();
-          console.log("Removed!");
-        });
-      });
-  };
-  const setCompleteTask = (value, flag) => {
-    console.log("setCompleteTask: " + value + " " + flag);
-    firebase
-      .database()
-      .ref("tasks")
-      .orderByChild("task")
-      .equalTo(value)
-      .once("value", snapshot => {
-        snapshot.forEach(function(data) {
-          data.ref.child("isCompleted").set(flag);
         });
       });
   };
 
-  const handleChange = e => {
+  const setCompleteTask = (value, flag) => {
+    firebase
+      .database()
+      .ref(TASKS)
+      .orderByChild(TASK)
+      .equalTo(value)
+      .once("value", snapshot => {
+        snapshot.forEach(function(data) {
+          data.ref.child(IS_COMPLETED).set(flag);
+        });
+      });
+  };
+
+  const searchTaskOnChange = e => {
     const inputValue = e.target.value;
 
     setFilterList(
@@ -101,7 +106,7 @@ const TaskDetails = () => {
         totalTaskCompleted={totalTaskCompleted}
         recentTaskList={recentTaskList}
       />
-      <SearchTask handleChange={handleChange} />
+      <SearchTask handleChange={searchTaskOnChange} />
       <TaskList
         setCompleteTask={setCompleteTask}
         data={filterList}

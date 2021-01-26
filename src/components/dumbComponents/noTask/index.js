@@ -4,21 +4,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Modals from "../modal/index";
+import { NO_TASK_TEXT } from "../../../constants/messages";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     minWidth: 275
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
-  },
-  title: {
-    fontSize: 14
-  },
-  pos: {
-    marginBottom: 12
   }
 }));
 
@@ -29,7 +19,7 @@ const NoTask = () => {
     <Card className={classes.root}>
       <CardContent>
         <Typography variant="h6" component="h2">
-          You have no task.
+          {NO_TASK_TEXT}
         </Typography>
         <Modals isEdit={false} />
       </CardContent>

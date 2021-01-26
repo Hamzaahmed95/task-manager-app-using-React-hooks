@@ -2,29 +2,35 @@ import React, { useState, useEffect } from "react";
 import Login from "./dumbComponents/login/index";
 import Loading from "./dumbComponents/loading/index";
 import firebase from "firebase";
+import {
+  INVALID_USERNAME,
+  INVALID_ID,
+  TOKEN,
+  USERNAME,
+  APIKEY,
+  USERS
+} from "../constants/messages";
 
 const AppComponent = () => {
   const [UserLoggedIn, IsUserLoggedIn] = useState(false);
   const [errorLoggedIn, IsErrorLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
+
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
-      console.log("USER: FOUND");
+    if (localStorage.getItem(TOKEN) !== null) {
       IsUserLoggedIn(true);
-      setUsername(localStorage.getItem("username"));
+      setUsername(localStorage.getItem(USERNAME));
     } else {
-      console.log("USER: NOTFOUND");
       IsUserLoggedIn(false);
     }
   }, []);
 
-  const handleSubmit = (id, username) => {
-    console.log("users:" + id + " " + username);
+  const signIn = (id, username) => {
     firebase
       .database()
-      .ref("users")
-      .orderByChild("apiKey")
+      .ref(USERS)
+      .orderByChild(APIKEY)
       .equalTo(id)
       .once("value")
       .then(snapshot => {
@@ -32,31 +38,29 @@ const AppComponent = () => {
           snapshot.forEach(function(data) {
             if (
               data
-                .child("username")
+                .child(USERNAME)
                 .val()
                 .toUpperCase() === username.toUpperCase()
             ) {
-              setUsername(data.child("username").val());
+              setUsername(data.child(USERNAME).val());
               IsErrorLoggedIn(false);
               IsUserLoggedIn(true);
-              localStorage.setItem("token", data.child("token").val());
-              localStorage.setItem("username", data.child("username").val());
+              localStorage.setItem(TOKEN, data.child(TOKEN).val());
+              localStorage.setItem(USERNAME, data.child(USERNAME).val());
             } else {
-              setErrorMessage("username is invalid");
+              setErrorMessage(INVALID_USERNAME);
               IsErrorLoggedIn(true);
-              console.log("users: username error");
             }
           });
         } else {
           IsErrorLoggedIn(true);
-          setErrorMessage("id is invalid");
-          console.log("users: apikey error");
+          setErrorMessage(INVALID_ID);
         }
       });
   };
-  const logoutSubmit = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+  const signOut = () => {
+    localStorage.removeItem(TOKEN);
+    localStorage.removeItem(USERNAME);
     IsUserLoggedIn(false);
   };
   return (
@@ -66,11 +70,11 @@ const AppComponent = () => {
           <Login
             errorLoggedIn={errorLoggedIn}
             errorMessage={errorMessage}
-            handleUserSubmit={handleSubmit}
+            handleUserSubmit={signIn}
           />
         </header>
       ) : (
-        <Loading logoutSubmit={logoutSubmit} username={username} />
+        <Loading logoutSubmit={signOut} username={username} />
       )}
     </div>
   );

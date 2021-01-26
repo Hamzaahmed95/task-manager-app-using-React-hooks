@@ -1,38 +1,29 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import Modals from "../modal/index";
 import "./index.css";
 
 const TaskList = props => {
-  const [checked, setChecked] = useState([]); // categories
+  const [checked, setChecked] = useState([]);
 
   const handleToggle = c => () => {
-    // return the first index or -1
     const clickedCategory = checked.indexOf(c);
-
     const all = [...checked];
-    console.log("clickedCategory: " + clickedCategory);
 
     if (clickedCategory === -1) {
       all.push(c);
       props.setCompleteTask(c, 1);
-      console.log("ahmedd: checked!!" + c);
     } else {
       props.setCompleteTask(c, 0);
-      console.log("ahmedd: unchecked!!" + c);
+
       all.splice(clickedCategory, 1);
     }
-
     setChecked(all);
   };
 

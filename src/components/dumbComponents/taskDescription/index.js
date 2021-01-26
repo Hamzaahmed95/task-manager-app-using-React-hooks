@@ -1,20 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./index.css";
 import Card from "@material-ui/core/Card";
 import DonutChart from "../donutchart/index";
-let arrayofTasks = [
-  {
-    id: "1",
-    task: "Clean the room"
-  },
-  { id: "2", task: "Clean the room" },
-  {
-    id: "3",
-    task: "Clean the room"
-  }
-];
+import { LATEST_CREATED_TASK_TEXT } from "../../../constants/messages";
 const TaskDescription = props => {
-  const [completedTask, isCompletedTask] = useState(false);
   return (
     <div className="task_description_container">
       <Card align="left" className="task_description_card1">
@@ -29,7 +18,7 @@ const TaskDescription = props => {
       </Card>
       <Card align="left" className="task_description_card2">
         <span style={{ color: "grey", fontSize: "22px" }}>
-          Latest Created Tasks
+          {LATEST_CREATED_TASK_TEXT}
         </span>
         {props.recentTaskList.map(task => (
           <div keys={task}>

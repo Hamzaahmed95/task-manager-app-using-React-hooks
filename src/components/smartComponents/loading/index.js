@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import Main from "../main/index";
+import Main from "../../dumbComponents/main/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "firebase";
-import Header from "../header/index";
-
-const Loading = props => {
-  const [Loadingg, isLoadingg] = useState(false);
+import Header from "../../dumbComponents/header/index";
+import { TASKS } from "../../../constants/messages";
+const LoadingComponent = props => {
+  const [Loading, isLoading] = useState(false);
   const [TaskAdded, isTaskAdded] = useState(false);
 
   useEffect(() => {
     firebase
       .database()
-      .ref("tasks")
-      .orderByChild("task")
+      .ref(TASKS)
+      .orderByChild(TASKS)
       .once("value", snapshot => {
         setTimeout(() => {
-          isLoadingg(true);
+          isLoading(true);
         }, 2000);
 
         if (snapshot.exists()) {
@@ -26,14 +26,12 @@ const Loading = props => {
 
     firebase
       .database()
-      .ref("tasks")
+      .ref(TASKS)
       .on("value", snapshot => {
-        // isLoadingg(false);
         setTimeout(() => {
           if (snapshot.exists()) {
             isTaskAdded(true);
           }
-          // isLoadingg(true);
         }, 2000);
       });
   }, []);
@@ -42,7 +40,7 @@ const Loading = props => {
       <Header logoutSubmit={props.logoutSubmit} username={props.username} />
 
       <header className="Loading-header">
-        {!Loadingg ? (
+        {!Loading ? (
           <div className="progress_bar" align="center">
             <CircularProgress className="progress_barColor" color="primary" />
           </div>
@@ -56,4 +54,4 @@ const Loading = props => {
   );
 };
 
-export default Loading;
+export default LoadingComponent;

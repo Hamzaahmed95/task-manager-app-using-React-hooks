@@ -3,6 +3,13 @@ import Button from "@material-ui/core/Button";
 import "./index.css";
 import InputField from "../../dumbComponents/customInputFields/index";
 import firebase from "firebase";
+import {
+  TASKS,
+  TASK,
+  USERNAME,
+  EDIT_TASK_TEXT,
+  ADD_TASK_TEXT
+} from "../../../constants/messages";
 
 const CustomizedInputs = props => {
   const [taskName, setTaskName] = useState("");
@@ -37,24 +44,24 @@ const CustomizedInputs = props => {
   const handleSubmitEditTask = () => {
     firebase
       .database()
-      .ref("tasks")
-      .orderByChild("task")
+      .ref(TASKS)
+      .orderByChild(TASK)
       .equalTo(props.taskItem)
       .once("value", snapshot => {
         snapshot.forEach(function(data) {
-          data.ref.child("task").set(editTaskName);
+          data.ref.child(TASK).set(editTaskName);
         });
       });
   };
 
   const handleSubmitTask = () => {
     const taskObject = {
-      userID: localStorage.getItem("username"),
+      userID: localStorage.getItem(USERNAME),
       task: taskName,
       isCompleted: 0
     };
 
-    let userRef = firebase.database().ref("tasks");
+    let userRef = firebase.database().ref(TASKS);
     let newUserRef = userRef.push();
     newUserRef
       .set(taskObject)
@@ -71,13 +78,13 @@ const CustomizedInputs = props => {
     <div className="input_container" align="center">
       {!props.modal ? (
         <>
+          {/* LOGIN INPUT */}
           <InputField
             type="text"
             label="Id"
             defaultValue={id}
             onChange={e => handleChangeId(e)}
             variant="filled"
-            id="reddit-input"
           />
           <InputField
             type="text"
@@ -85,7 +92,6 @@ const CustomizedInputs = props => {
             defaultValue={username}
             onChange={e => handleChangeUsername(e)}
             variant="filled"
-            id="reddit-input"
           />
           <Button
             onClick={e => props.handleUserSubmit(id, username)}
@@ -100,13 +106,13 @@ const CustomizedInputs = props => {
         <>
           {props.isEdit ? (
             <div>
+              {/* EDIT TASK INPUT */}
               <InputField
                 label="Task Name"
                 type="text"
                 defaultValue={props.taskItem}
                 onChange={e => handleChangeEditTaskName(e)}
                 variant="filled"
-                id="reddit-input"
               />
               <Button
                 onClick={handleSubmitEditTask}
@@ -114,18 +120,18 @@ const CustomizedInputs = props => {
                 className="submitButton"
                 disabled={!editTaskName}
               >
-                Edit Task
+                {EDIT_TASK_TEXT}
               </Button>
             </div>
           ) : (
             <div>
+              {/* ADD TASK INPUT */}
               <InputField
                 label="Task Name"
                 type="text"
                 defaultValue={taskName}
                 onChange={e => handleChangeTaskName(e)}
                 variant="filled"
-                id="reddit-input"
               />
               <Button
                 onClick={handleSubmitTask}
@@ -133,7 +139,7 @@ const CustomizedInputs = props => {
                 className="submitButton"
                 disabled={!taskName}
               >
-                Add Task
+                {ADD_TASK_TEXT}
               </Button>
             </div>
           )}

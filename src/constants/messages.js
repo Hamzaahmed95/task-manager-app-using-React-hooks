@@ -1,0 +1,17 @@
+export const INVALID_USERNAME = "username is invalid";
+export const INVALID_ID = "id is invalid";
+export const TOKEN = "token";
+export const USERNAME = "username";
+export const APIKEY = "apiKey";
+export const USERID = "userID";
+export const IS_COMPLETED = "isCompleted";
+export const USERS = "users";
+export const TASKS = "tasks";
+export const TASK = "task";
+export const LOGIN_TEXT = "LOGIN";
+export const EDIT_TASK_TEXT = "Edit Task";
+export const ADD_LOGOUT_TEXT = "Logout";
+export const ADD_TASK_TEXT = "Add Task";
+export const ADD_NEW_TASK_TEXT = "New Task";
+export const NO_TASK_TEXT = "You have no task";
+export const LATEST_CREATED_TASK_TEXT = "Latest Created Tasks";

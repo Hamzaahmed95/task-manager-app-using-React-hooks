@@ -1,7 +1,7 @@
 import { fade, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
-const useStylesReddit = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     border: "1px solid #e2e2e1",
     overflow: "hidden",
@@ -21,7 +21,7 @@ const useStylesReddit = makeStyles(theme => ({
 }));
 
 const InputField = props => {
-  const classes = useStylesReddit();
+  const classes = useStyles();
 
   return (
     <TextField
