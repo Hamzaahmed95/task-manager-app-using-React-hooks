@@ -1,4 +1,4 @@
-# TASK MANAGER 
+# Task Manager App using React Hooks
 
 A simple tudo app for managing tasks.
 
