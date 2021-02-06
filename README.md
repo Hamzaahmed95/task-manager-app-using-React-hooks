@@ -17,8 +17,8 @@ A simple tudo app for managing tasks.
 
 ## Getting Started
 ```bash
-git clone https://github.com/Hamzaahmed95/tdcx_assignment.git
-cd tdcx_assignment
+git clone https://github.com/Hamzaahmed95/task-manager-app-using-React-hooks.git
+cd task-manager-app-using-React-hooks
 npm install 
 npm start
 ```
