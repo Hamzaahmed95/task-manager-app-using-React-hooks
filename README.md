@@ -37,4 +37,4 @@ USER 2:
 
 ## DEMO
 
-![Demo] (https://www.canva.com/design/DAEUk-Plzyc/ZksXdGWCj0zDJCKvdGcBQQ/watch)
+![Demo](https://www.canva.com/design/DAEUk-Plzyc/ZksXdGWCj0zDJCKvdGcBQQ/watch)
