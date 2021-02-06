@@ -1,6 +1,7 @@
 {
-  "name": "tdcx_assignment",
+  "name": "task_manager_app_using_react_hooks",
   "version": "0.1.0",
+  "homepage": "http://hamzaahmed95.github.io/task-manager-app-using-React-hooks/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.2",
